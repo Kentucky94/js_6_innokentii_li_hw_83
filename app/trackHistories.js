@@ -1,5 +1,4 @@
 const express = require('express');
-// const moment = require('moment');
 
 const Track = require('../models/Track');
 const User = require('../models/User');
@@ -14,7 +13,7 @@ router.post('/', async (req, res) => {
   const user = await User.findOne({token});
 
   if(!track) return res.status(400).send({error: 'Track Not Found!'});
-  if(!user) return res.status(400).send({error: 'Not Authorized!'});
+  if(!user) return res.status(401).send({error: 'Not Authorized!'});
 
   const trackHistoryData = {track: track._id, user: user._id};
 
